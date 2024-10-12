@@ -4,15 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - GridManager
   - blue
+  - yellow
+  - purple
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Car
+  - Obstacle
   - Water
   - UI
-  - 
+  - Environment
   - 
   - 
   - 

@@ -18,7 +18,7 @@ public class PlacementManager : MonoBehaviour
     //testing mechanics
 
     [SerializeField] Grid grid;
-    [SerializeField] GameObject placementIndicator;
+    [SerializeField] GameObject placementIndicator; 
 
 
 }
