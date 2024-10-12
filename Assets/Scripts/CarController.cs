@@ -60,13 +60,15 @@ public class CarController : MonoBehaviour
     {
         Vector3 setPosition = gridManager.GetNearestPointOnGrid(transform.position);
         transform.position = setPosition + offsetPos;
+        carState = CarState.ReadyforColor;
     }
 
-    private CarState carState;
-    private enum CarState
+    public CarState carState;
+    public enum CarState
     { 
         Moving,
-        Slotted
+        Slotted,
+        ReadyforColor
     }
 
     private void UpdateState()
