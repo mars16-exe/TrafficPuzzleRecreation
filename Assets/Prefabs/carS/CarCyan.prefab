@@ -102,7 +102,7 @@ MonoBehaviour:
   speed: 2
   wasMoving: 0
   offsetPos: {x: 0, y: 0.22, z: 0}
-  maxDistance: 0.7
+  maxDistance: 0.88
   carState: 0
 --- !u!114 &468075111424476450
 MonoBehaviour:

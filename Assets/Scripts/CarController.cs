@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -21,7 +22,7 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Finish")
+        if (other.CompareTag("Finish"))
         {
             Destroy(gameObject);
         }
@@ -29,11 +30,12 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(carState == CarState.Moving && GameManager.gameManagerInstance.gameState == GameManager.GameState.Flowing)
+        if (carState == CarState.Moving)
         {
             MoveCar();
+            CheckforCar();
         }
-        else if(carState == CarState.Slotted)
+        else if (carState == CarState.Slotted)
         {
             SlotCar();
         }
@@ -42,7 +44,10 @@ public class CarController : MonoBehaviour
     private void MoveCar()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
 
+    public void CheckforCar()
+    {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Debug.DrawRay(transform.position, fwd * maxDistance, Color.red);
 
@@ -53,6 +58,11 @@ public class CarController : MonoBehaviour
         {
             wasMoving = true;
             carState = CarState.Slotted;
+        }
+        else if(!Physics.Raycast(ray, out hit, maxDistance, layerDetection))
+        {
+            wasMoving = false;
+            carState = CarState.Moving;
         }
     }
 
@@ -68,12 +78,12 @@ public class CarController : MonoBehaviour
     { 
         Moving,
         Slotted,
-        ReadyforColor
+        ReadyforColor,
     }
 
-    private void UpdateState()
+    private void UpdateState()  //configure Later! 
     {
-        GameManager.gameManagerInstance.UpdateGameState(GameManager.GameState.ColorMatch);
+        GameManager.Instance.UpdateGameState(GameManager.GameState.ColorMatch);
     }
 
 }

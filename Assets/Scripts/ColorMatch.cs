@@ -6,11 +6,13 @@ public class ColorMatch : MonoBehaviour
 {
     [SerializeField] private LayerMask layerMask;
     private CarController carController;
-    [SerializeField] private float rayDistance = 0.7f;
+    [SerializeField] private float rayDistance = 0.88f;
     [SerializeField] private string myTag;
 
     Ray[] rayH = new Ray[2];
     Ray[] rayV = new Ray[2];
+
+    [SerializeField] private bool failedH = false, failedV = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +26,13 @@ public class ColorMatch : MonoBehaviour
     {
         if(carController.carState == CarController.CarState.ReadyforColor)
         {
-            MatchColorsH();
-            MatchColorsV();
+            MatchColorsH();  //first horizontal check, then vertical check inside MatchColorsH()            
+            MatchColorsV();        
         }
-        else
+
+        if(failedH && failedV)
         {
-            //doNothing
+            carController.CheckforCar();
         }
     }
 
@@ -51,17 +54,23 @@ public class ColorMatch : MonoBehaviour
         rayH[1] = new Ray(transform.position, right * rayDistance);
         RaycastHit hitRight;
 
-        if (Physics.Raycast(rayH[0], out hitRight, rayDistance, layerMask) && Physics.Raycast(rayV[1], out hitLeft, rayDistance, layerMask))
+        if (Physics.Raycast(rayH[1], out hitRight, rayDistance, layerMask) && Physics.Raycast(rayH[0], out hitLeft, rayDistance, layerMask))
         {
-            if(hitRight.collider.tag == myTag && hitLeft.collider.tag == myTag)
+            if(hitRight.collider.CompareTag(myTag) && hitLeft.collider.CompareTag(myTag))
             {
-                Destroy(hitRight.collider.gameObject);
-                Destroy(hitLeft.collider.gameObject);
-                Destroy(this.gameObject);
+                CarController rightCar = hitRight.collider.GetComponent<CarController>();
+                CarController leftCar = hitLeft.collider.GetComponent<CarController>();
+
+                if(rightCar.carState == CarController.CarState.ReadyforColor && leftCar.carState == CarController.CarState.ReadyforColor)
+                {
+                    Destroy(rightCar.gameObject);
+                    Destroy(leftCar.gameObject);
+                    Destroy(this.gameObject);
+                }
             }
             else
             {
-                //doNothing
+                failedH = true; //just checks
             }
         }
     }
@@ -84,17 +93,23 @@ public class ColorMatch : MonoBehaviour
         rayV[1] = new Ray(transform.position, back * rayDistance);
         RaycastHit hitBack;
 
-        if (Physics.Raycast(rayV[0], out hitBack, rayDistance, layerMask) && Physics.Raycast(rayV[1], out hitForward, rayDistance, layerMask))
+        if (Physics.Raycast(rayV[1], out hitBack, rayDistance, layerMask) && Physics.Raycast(rayV[0], out hitForward, rayDistance, layerMask))
         {
-            if (hitBack.collider.tag == myTag && hitForward.collider.tag == myTag)
+            if (hitBack.collider.CompareTag(myTag) && hitForward.collider.CompareTag(myTag))
             {
-                Destroy(hitBack.collider.gameObject);
-                Destroy(hitForward.collider.gameObject);
-                Destroy(this.gameObject);
+                CarController backCar = hitBack.collider.GetComponent<CarController>();
+                CarController forwardCar = hitForward.collider.GetComponent<CarController>();
+
+                if (backCar.carState == CarController.CarState.ReadyforColor && forwardCar.carState == CarController.CarState.ReadyforColor)
+                {
+                    Destroy(backCar.gameObject);
+                    Destroy(forwardCar.gameObject);
+                    Destroy(this.gameObject);
+                }
             }
             else
             {
-                //doNothing
+                failedV = true; //just checks
             }
         }
     }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gameManagerInstance;
+    public static GameManager Instance;
 
     public GameState gameState;
 
     void Awake()
     {
-        gameManagerInstance = this;
+        Instance = this;
         gameState = GameState.Flowing;
     }
 
