@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8761874659666927648}
-  - component: {fileID: 2320690124531559130}
   - component: {fileID: 8346723463163794316}
   - component: {fileID: 5544800519573176264}
   - component: {fileID: 1992393303450663293}
+  - component: {fileID: 2320690124531559130}
   m_Layer: 3
   m_Name: CarPurple
   m_TagString: purple
@@ -36,26 +36,6 @@ Transform:
   - {fileID: 7416957383069142828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2320690124531559130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498716485897708787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 836234dfcb416f141a9823fb85ad72c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerDetection:
-    serializedVersion: 2
-    m_Bits: 8
-  speed: 2
-  wasMoving: 0
-  offsetPos: {x: 0, y: 0.22, z: 0}
-  maxDistance: 0.88
-  carState: 0
 --- !u!65 &8346723463163794316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,6 +101,28 @@ MonoBehaviour:
     m_Bits: 8
   rayDistance: 0.88
   myTag: 
+  failedH: 1
+  failedV: 1
+--- !u!114 &2320690124531559130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498716485897708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836234dfcb416f141a9823fb85ad72c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerDetection:
+    serializedVersion: 2
+    m_Bits: 8
+  speed: 2
+  wasMoving: 0
+  offsetPos: {x: 0, y: 0.22, z: 0}
+  maxDistance: 0.88
+  carState: 0
 --- !u!1 &8059271010957421244
 GameObject:
   m_ObjectHideFlags: 0

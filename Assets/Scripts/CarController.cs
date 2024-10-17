@@ -16,7 +16,8 @@ public class CarController : MonoBehaviour
     private void Start()
     {
         gridManager = GameObject.FindGameObjectWithTag("GridManager").GetComponent<GridManager>();
-        SlotCar();
+       
+        SlotCar(); //makes sure all cars are aligned with the grid
         carState = CarState.Moving;
     }
 
@@ -28,7 +29,7 @@ public class CarController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (carState == CarState.Moving)
         {
@@ -78,7 +79,7 @@ public class CarController : MonoBehaviour
     { 
         Moving,
         Slotted,
-        ReadyforColor,
+        ReadyforColor
     }
 
     private void UpdateState()  //configure Later! 

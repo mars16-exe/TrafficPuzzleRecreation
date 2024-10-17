@@ -22,11 +22,11 @@ public class ColorMatch : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(carController.carState == CarController.CarState.ReadyforColor)
         {
-            MatchColorsH();  //first horizontal check, then vertical check inside MatchColorsH()            
+            MatchColorsH();  //first horizontal check            
             MatchColorsV();        
         }
 
