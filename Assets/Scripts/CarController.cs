@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    private GridManager gridManager;
     [SerializeField] private LayerMask layerDetection;
 
     [SerializeField] private float speed;
@@ -15,8 +13,7 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
-        gridManager = GameObject.FindGameObjectWithTag("GridManager").GetComponent<GridManager>();
-       
+        StartCoroutine("DecisionMaking");
         SlotCar(); //makes sure all cars are aligned with the grid
         carState = CarState.Moving;
     }
@@ -26,6 +23,22 @@ public class CarController : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             Destroy(gameObject);
+        }
+        else if (other.CompareTag("trafficCone"))
+        {
+            Destroy(this.gameObject);
+        }
+        else if (other.CompareTag("blue") && !carDecided)
+        {
+            Destroy(this.gameObject);
+        }
+        else if (other.CompareTag("purple") && !carDecided)
+        {
+            Destroy(this.gameObject);
+        }
+        else if (other.CompareTag("yellow") && !carDecided)
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -60,7 +73,7 @@ public class CarController : MonoBehaviour
             wasMoving = true;
             carState = CarState.Slotted;
         }
-        else if(!Physics.Raycast(ray, out hit, maxDistance, layerDetection))
+        else if (!Physics.Raycast(ray, out hit, maxDistance, layerDetection))
         {
             wasMoving = false;
             carState = CarState.Moving;
@@ -69,14 +82,14 @@ public class CarController : MonoBehaviour
 
     private void SlotCar()
     {
-        Vector3 setPosition = gridManager.GetNearestPointOnGrid(transform.position);
+        Vector3 setPosition = GridManager.Instance.GetNearestPointOnGrid(transform.position);
         transform.position = setPosition + offsetPos;
         carState = CarState.ReadyforColor;
     }
 
     public CarState carState;
     public enum CarState
-    { 
+    {
         Moving,
         Slotted,
         ReadyforColor
@@ -85,6 +98,13 @@ public class CarController : MonoBehaviour
     private void UpdateState()  //configure Later! 
     {
         GameManager.Instance.UpdateGameState(GameManager.GameState.ColorMatch);
+    }
+
+    public bool carDecided = false;
+    IEnumerator DecisionMaking()
+    {
+        yield return new WaitForSeconds(1f);
+        carDecided = true;
     }
 
 }

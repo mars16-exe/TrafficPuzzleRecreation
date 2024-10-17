@@ -8,6 +8,7 @@ TagManager:
   - blue
   - yellow
   - purple
+  - trafficCone
   layers:
   - Default
   - TransparentFX

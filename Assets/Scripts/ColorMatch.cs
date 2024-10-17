@@ -27,7 +27,7 @@ public class ColorMatch : MonoBehaviour
         if(carController.carState == CarController.CarState.ReadyforColor)
         {
             MatchColorsH();  //first horizontal check            
-            MatchColorsV();        
+            MatchColorsV();
         }
 
         if(failedH && failedV)
