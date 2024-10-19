@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -69,7 +68,7 @@ public class CarController : MonoBehaviour
         Ray ray = new Ray(transform.position, fwd * maxDistance);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, maxDistance, layerDetection))
+        if (Physics.Raycast(ray, out hit, maxDistance, layerDetection) && carState != CarState.Slotted)
         {
             wasMoving = true;
             carState = CarState.Slotted;
@@ -104,7 +103,7 @@ public class CarController : MonoBehaviour
     public bool carDecided = false;
     IEnumerator DecisionMaking()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         carDecided = true;
     }
 

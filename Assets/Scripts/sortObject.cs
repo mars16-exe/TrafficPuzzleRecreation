@@ -9,12 +9,8 @@ public class sortObject : MonoBehaviour
     {
         Vector3 slotPos = GridManager.Instance.GetNearestPointOnGrid(transform.position);
         pos = slotPos;
-    }
 
-    private void Update()
-    {
         transform.position = pos + offset;
+
     }
-
-
 }

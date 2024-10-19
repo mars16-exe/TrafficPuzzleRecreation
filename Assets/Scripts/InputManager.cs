@@ -12,8 +12,6 @@ public class InputManager : MonoBehaviour
 
     public int currentCar; //0 is blue, 1 is purple, 2 is yellow
 
-    [SerializeField] string currentCarName;
-
     private void Awake()
     {
         if (Instance != null)
@@ -33,11 +31,6 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         GetSelectedPosition();
-    }
-
-    private void LateUpdate()
-    {
-        CarNameHandler();
     }
     public void GetSelectedPosition()
     {
@@ -61,8 +54,6 @@ public class InputManager : MonoBehaviour
                 {
                     //do Nothing
                 }
-
-
             }
         }
 
@@ -71,24 +62,5 @@ public class InputManager : MonoBehaviour
     private void RandomizeCarSelection()
     {
         currentCar = Random.Range(0, carPrefab.Length);
-    }
-
-    private void CarNameHandler()
-    {
-        switch (currentCar)
-        {
-            case 0:
-                currentCarName = "Blue";
-                break;
-            case 1:
-                currentCarName = "Purple";
-                break;
-            case 2:
-                currentCarName = "Yellow";
-                break;
-            default:
-                currentCarName = "Default";
-                break;
-        }
     }
 }

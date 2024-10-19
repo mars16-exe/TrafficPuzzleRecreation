@@ -28,6 +28,8 @@ public class ColorMatch : MonoBehaviour
         {
             MatchColorsH();  //first horizontal check            
             MatchColorsV();
+            failedH = false;
+            failedV = false;
         }
 
         if(failedH && failedV)
