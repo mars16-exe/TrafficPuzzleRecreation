@@ -44,10 +44,11 @@ public class CarController : MonoBehaviour
 
     private void LateUpdate()
     {
+            CheckforCar();
+
         if (carState == CarState.Moving)
         {
             MoveCar();
-            CheckforCar();
         }
         else if (carState == CarState.Slotted)
         {
@@ -68,7 +69,7 @@ public class CarController : MonoBehaviour
         Ray ray = new Ray(transform.position, fwd * maxDistance);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, maxDistance, layerDetection) && carState != CarState.Slotted)
+        if (Physics.Raycast(ray, out hit, maxDistance, layerDetection))
         {
             wasMoving = true;
             carState = CarState.Slotted;

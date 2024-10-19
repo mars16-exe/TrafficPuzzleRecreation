@@ -12,7 +12,7 @@ public class ColorMatch : MonoBehaviour
     Ray[] rayH = new Ray[2];
     Ray[] rayV = new Ray[2];
 
-    [SerializeField] private bool failedH = false, failedV = false;
+    [SerializeField] private bool carChecked = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +24,13 @@ public class ColorMatch : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(carController.carState == CarController.CarState.ReadyforColor)
+        if (carController.carState == CarController.CarState.ReadyforColor)
         {
+            carChecked = false;
             MatchColorsH();  //first horizontal check            
             MatchColorsV();
-            failedH = false;
-            failedV = false;
         }
-
-        if(failedH && failedV)
+        else if(carChecked)
         {
             carController.CheckforCar();
         }
@@ -70,10 +68,10 @@ public class ColorMatch : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
-            else
-            {
-                failedH = true; //just checks
-            }
+        }
+        else
+        {
+            carChecked = true;
         }
     }
 
@@ -109,10 +107,10 @@ public class ColorMatch : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
-            else
-            {
-                failedV = true; //just checks
-            }
+        }
+        else
+        {
+            carChecked = true;
         }
     }
 
