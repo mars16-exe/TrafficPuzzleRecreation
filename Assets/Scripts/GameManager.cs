@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public CarController[] carControllers;
-
     public GameState gameState;
 
     private void Awake()
@@ -21,8 +19,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         gameState = GameState.Flowing;
-
-        carControllers = GameObject.FindObjectsOfType<CarController>();
     }
 
     private void LateUpdate()

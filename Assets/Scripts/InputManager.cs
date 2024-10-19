@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private LayerMask placementLayer;
 
+
+    private bool playable;
+
     public int currentCar; //0 is blue, 1 is purple, 2 is yellow
 
     private void Awake()
@@ -26,11 +29,15 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         RandomizeCarSelection();
+        playable = true;
     }
 
     private void Update()
     {
-        GetSelectedPosition();
+        if(playable)
+        {
+            GetSelectedPosition();
+        }
     }
     public void GetSelectedPosition()
     {
@@ -49,6 +56,8 @@ public class InputManager : MonoBehaviour
                 {
                     spawner.SpawnCar(carPrefab[currentCar]);
                     RandomizeCarSelection();
+                    
+                    StartCoroutine("TimerReset");
                 }
                 else if (hit.collider == null)
                 {
@@ -57,6 +66,13 @@ public class InputManager : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator TimerReset()
+    {
+        playable = false;
+        yield return new WaitForSeconds(1f);
+        playable = true;
     }
 
     private void RandomizeCarSelection()

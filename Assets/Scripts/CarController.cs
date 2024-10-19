@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -9,6 +10,8 @@ public class CarController : MonoBehaviour
     public bool wasMoving = false;
     [SerializeField] Vector3 offsetPos;
     [SerializeField] float maxDistance;
+
+    [SerializeField] GameObject particleFX;
 
     private void Start()
     {
@@ -106,6 +109,11 @@ public class CarController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         carDecided = true;
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(particleFX, transform.position, Quaternion.identity);
     }
 
 }

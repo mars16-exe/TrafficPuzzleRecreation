@@ -101,8 +101,7 @@ MonoBehaviour:
     m_Bits: 8
   rayDistance: 0.88
   myTag: 
-  failedH: 1
-  failedV: 1
+  carChecked: 0
 --- !u!114 &5537817881908998094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +121,7 @@ MonoBehaviour:
   wasMoving: 0
   offsetPos: {x: 0, y: 0.22, z: 0}
   maxDistance: 0.88
+  particleFX: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
   carState: 0
   carDecided: 0
 --- !u!1 &3777114258375850146
