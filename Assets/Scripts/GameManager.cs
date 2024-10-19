@@ -6,12 +6,31 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public CarController[] carControllers;
+
     public GameState gameState;
 
-    void Awake()
+    private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+
         gameState = GameState.Flowing;
+
+        carControllers = GameObject.FindObjectsOfType<CarController>();
+    }
+
+    private void LateUpdate()
+    {
+        //for (int i = 0; i < carControllers.Length; i++)
+        //{
+
+        //}
     }
 
     public void UpdateGameState(GameState newState)

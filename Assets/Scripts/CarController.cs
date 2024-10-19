@@ -16,6 +16,7 @@ public class CarController : MonoBehaviour
         StartCoroutine("DecisionMaking");
         SlotCar(); //makes sure all cars are aligned with the grid
         carState = CarState.Moving;
+
     }
 
     private void OnTriggerEnter(Collider other)

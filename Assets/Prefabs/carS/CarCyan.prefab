@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8393651149503958383}
   - component: {fileID: 2920817117067594082}
   - component: {fileID: 8078264908120191933}
-  - component: {fileID: 5537817881908998094}
   - component: {fileID: 468075111424476450}
+  - component: {fileID: 5537817881908998094}
   m_Layer: 3
   m_Name: CarCyan
   m_TagString: blue
@@ -84,6 +84,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &468075111424476450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004718789861392456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e1d9e1efaf2c34689fbc231a54daba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  rayDistance: 0.88
+  myTag: 
+  failedH: 1
+  failedV: 1
 --- !u!114 &5537817881908998094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,25 +123,7 @@ MonoBehaviour:
   offsetPos: {x: 0, y: 0.22, z: 0}
   maxDistance: 0.88
   carState: 0
---- !u!114 &468075111424476450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004718789861392456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e1d9e1efaf2c34689fbc231a54daba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  rayDistance: 0.88
-  myTag: 
-  failedH: 1
-  failedV: 1
+  carDecided: 0
 --- !u!1 &3777114258375850146
 GameObject:
   m_ObjectHideFlags: 0

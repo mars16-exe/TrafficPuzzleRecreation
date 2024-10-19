@@ -4,13 +4,40 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private GameObject carPrefab;
+    public static InputManager Instance;
+
+    [SerializeField] private GameObject[] carPrefab = new GameObject[3]; 
 
     [SerializeField] private LayerMask placementLayer;
+
+    public int currentCar; //0 is blue, 1 is purple, 2 is yellow
+
+    [SerializeField] string currentCarName;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        RandomizeCarSelection();
+    }
 
     private void Update()
     {
         GetSelectedPosition();
+    }
+
+    private void LateUpdate()
+    {
+        CarNameHandler();
     }
     public void GetSelectedPosition()
     {
@@ -27,7 +54,8 @@ public class InputManager : MonoBehaviour
 
                 if (spawner != null && Input.GetMouseButtonDown(0))
                 {
-                    spawner.SpawnCar(carPrefab);
+                    spawner.SpawnCar(carPrefab[currentCar]);
+                    RandomizeCarSelection();
                 }
                 else if (hit.collider == null)
                 {
@@ -38,5 +66,29 @@ public class InputManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void RandomizeCarSelection()
+    {
+        currentCar = Random.Range(0, carPrefab.Length);
+    }
+
+    private void CarNameHandler()
+    {
+        switch (currentCar)
+        {
+            case 0:
+                currentCarName = "Blue";
+                break;
+            case 1:
+                currentCarName = "Purple";
+                break;
+            case 2:
+                currentCarName = "Yellow";
+                break;
+            default:
+                currentCarName = "Default";
+                break;
+        }
     }
 }
